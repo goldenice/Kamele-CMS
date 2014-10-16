@@ -1,10 +1,13 @@
 <?php
 namespace System;
 use PDO;
+use System\Lib\Kcms\MyPDO;
 if (!defined('SYSTEM')) exit('No direct script access allowed');
 
 /**
  * A basic databaseconnection handler, based on PDO
+ * 
+ * Modified for using the MyPDO library in Kamele CMS 0.x
  * 
  * @package     Kamele Framework
  * @subpackage  System
@@ -40,10 +43,10 @@ class Database extends Singleton {
      * @param   string      $name       The name of the database to connect to
      * @return  boolean
      */
-    public function __construct($host = DB_HOST, $user = DB_USER, $pass = DB_PASS, $name = DB_NAME, $type = DB_TYPE) {
+    public function __construct($host = DB_HOST, $user = DB_USER, $pass = DB_PASS, $name = DB_NAME, $type = DB_TYPE, $prefix = DB_PREFIX) {
         $this->dbtype = $type;
-        $this->handler = new PDO($this->dbtype.':dbname='.$name.';host='.$host, $user, $pass);
-        $this->handler->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
+        $this->handler = new MyPDO($this->dbtype.':dbname='.$name.';host='.$host, $user, $pass, $prefix);
+        $this->handler->setAttribute(MyPDO::ATTR_ERRMODE, MyPDO::ERRMODE_SILENT);
         if ($this->handler == null or $this->handler == false) {
             return false;
             $this->handler = null;
@@ -142,7 +145,7 @@ class Database extends Singleton {
      */
     function safeQuery($query, $input = array()) {
     	$this->querycount++;
-        $prep = $this->handler->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $prep = $this->handler->prepare($query, array(MyPDO::ATTR_CURSOR => MyPDO::CURSOR_FWDONLY));
         foreach ($input as $k=>$v) {
             $input[':'.$k] = $v;
             unset($input[$k]);

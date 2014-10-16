@@ -1,2 +1,2 @@
-config/database.php
-config/baseurl.php
+/src/config/database.php
+/src/config/baseurl.php

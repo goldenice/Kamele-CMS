@@ -20,7 +20,7 @@ class Home extends \System\Basecontroller {
 		$this->template = $this->loader['\Modules\Main\Services\Templating']->getTemplateDirectory();
 	}
 	
-    function index($arg = null) {		
+    function index($arg = null) {
         echo $this->template;
     }
 }

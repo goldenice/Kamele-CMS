@@ -35,7 +35,7 @@ class Templating extends \System\Baseservice {
     }
     
     public function getTemplateDirectory() {
-        return $this->template;
+        return $this->template_base_dir.$this->template;
     }
     
     private function templateExists($dir) {

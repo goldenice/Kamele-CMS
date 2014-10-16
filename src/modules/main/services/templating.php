@@ -1,7 +1,5 @@
 <?php
 namespace Modules\Main\Services;
-use \System\Baseservice;
-use \Exception;
 
 if (!defined('SYSTEM')) exit('No direct script access allowed');
 
@@ -14,19 +12,21 @@ if (!defined('SYSTEM')) exit('No direct script access allowed');
  * @author      Rick Lubbers <me@ricklubbers.nl>
  * @since       0.1
  */
-class Templating extends Baseservice {
+class Templating extends \System\Baseservice {
     
     private $template_base_dir = 'modules/templates/';
     private $template;
     
     public function __construct() {
+        parent::__construct();
+        
         $template = $this->loader['\Modules\Main\Models\Settings']->getSetting('template');
         if ($template == null or $this->templateExists($template) == false) {
             if ($this->templateExists('default')) {
                 $this->template = 'default';
             }
             else {
-                throw new Exception('Cannot find template');
+                throw new \Exception('Cannot find template');
             }
         }
         else {

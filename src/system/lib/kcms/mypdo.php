@@ -22,7 +22,7 @@ class MyPDO extends PDO {
     public function __construct($dsn, $user = null, $password = null, $driver_options = array(), $prefix = null, $suffix = null) {
         $this->_table_prefix = $prefix;
         $this->_table_suffix = $suffix;
-        parent::__construct($dsn, $user, $password, $driver_options);
+        parent::__construct($dsn, $user, $password);
     }
 
     public function exec($statement) {

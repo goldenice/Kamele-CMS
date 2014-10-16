@@ -1,5 +1,7 @@
 <?php
 namespace Modules\Main\Controllers;
+use \Modules\Main\System\Controller;
+use \System\Layout;
 if (!defined('SYSTEM')) exit('No direct script access allowed');
 
 /**
@@ -10,17 +12,10 @@ if (!defined('SYSTEM')) exit('No direct script access allowed');
  * @author		Rick Lubbers <me@ricklubbers.nl>
  * @since		0.1
  */
-class Home extends \System\Basecontroller {
+class Home extends Controller {
 	
-	private $template;
-	
-	function __construct() {
-		parent::__construct();
-		
-		$this->template = $this->loader['\Modules\Main\Services\Templating']->getTemplateDirectory();
-	}
-	
-    function index($arg = null) {
-        echo $this->template;
+	function index($arg = null) {
+        $this->output['content'] = 'Test';
     }
+	
 }

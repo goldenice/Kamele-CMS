@@ -1,20 +1,18 @@
-Kamele Framework
+Kamele CMS
 =============
-[![Build Status](https://travis-ci.org/goldenice/Kamele-Framework.png?branch=master)](https://travis-ci.org/goldenice/Kamele-Framework)
 
-Quite a simple framework
+A minimalistic CMS
 --------------
-Kamele Framework is an awesome tiny framework, which can be used for both tiny one-page projects and big-ish applications.
-It is very lightweight, and has some [pretty good documentation](http://goldenice.github.io/Kamele-Framework/ "Kamele Documentation"). I wrote it because I needed a lightweight MVC framework, and I thought other frameworks were too complicated for tiny projects.
+Kamele aims to be exactly what you need for your website. It is tiny, it is fast, and it is easy to understand.
+
+Status
+--------------
+At this point Kamele CMS is in development, and not nearly ready for testing, let alone production websites. Documentation, even if it is present, may not be up to date.
 
 License
 --------------
-Kamele is open source and licensed under the MIT license. For more information see LICENSE.txt
+Kamele CMS is open source and licensed under the MIT license. For more information see LICENSE.txt
 
 Contributing
 --------------
-You can contribute! If you think something is missing, you have a library to add, or you just want to help, e-mail me at kamele@ricklubbers.nl and we'll work something out. Alternatively you can fork this repo and create a pull request.
-
-Helping
---------------
-You can help by contribution, as mentioned above, but you can of course also help in other ways. I always like to see people using Kamele, so you can spread the word. If you like, you can buy me a cup of coffee. My bitcoin address is 19ahUNppJCShEBJ8JfcCRWYtiUwFydRRQj.
+You can contribute! Just look at the issue tracker, and comment there. The preferred method is to fork the repo and submit a pull request. Your help will be appreciated.

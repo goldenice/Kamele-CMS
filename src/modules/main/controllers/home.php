@@ -19,6 +19,7 @@ class Home extends Controller {
 	function index($arg = null) {
 		// Get whether the home page is a blog article overview or a static page
 		$fp_type = $this->loader['\Modules\Main\Models\Settings']->getKey('frontpage_type');
+		
 		if ($fp_type == 'static') {
 			$fp_id = $this->loader['\Modules\Main\Models\Settings']->getKey('frontpage_page_id');
 			if ($fp_id == null || is_nan($fp_id)) {

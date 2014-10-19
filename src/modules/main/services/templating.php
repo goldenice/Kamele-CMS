@@ -20,7 +20,7 @@ class Templating extends \System\Baseservice {
     public function __construct() {
         parent::__construct();
         
-        $template = $this->loader['\Modules\Main\Models\Settings']->getSetting('template');
+        $template = $this->loader['\Modules\Main\Models\Settings']->getKey('template');
         if ($template == null or $this->templateExists($template) == false) {
             if ($this->templateExists('default')) {
                 $this->template = 'default';

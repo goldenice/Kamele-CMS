@@ -15,7 +15,7 @@ if (!defined('SYSTEM')) exit('No direct script access allowed');
  */
 class Settings extends Basemodel {
     
-    public function getSetting($key) {
+    public function getKey($key) {
         $result = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `settings` WHERE `key`=>:key LIMIT 0,1", array('key'=>$key)));
         if ($result === null) {
             return null;

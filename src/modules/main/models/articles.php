@@ -14,6 +14,12 @@ if (!defined('SYSTEM')) exit('No direct script access allowed');
  */
 class Articles extends Baseservice {
     
+    /**
+     * Gets by ID
+     * 
+     * @param   int     $id     The ID of the item to fetch
+     * @return  Array | null
+     */
     public function getById($id) {
 	    $article = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `articles` WHERE `id`=:id LIMIT 0,1", array('id'=>$id)));
 	    if ($article != null && is_array($article)) {
@@ -22,6 +28,12 @@ class Articles extends Baseservice {
 	    return null;
 	}
 	
+	/**
+     * Gets only visible items by ID
+     * 
+     * @param   int     $id     The ID of the item to fetch
+     * @return  Array | null
+     */
 	public function getVisibleById($id) {
 	    $cur_time = time();
 	    $article = $this->db->fetchAssoc($this->db->safeQuery(
@@ -37,6 +49,12 @@ class Articles extends Baseservice {
         return null;
 	}
 	
+	/**
+     * Gets by alias
+     * 
+     * @param   string  $id     The ID of the item to fetch
+     * @return  Array | null
+     */
 	public function getByAlias($alias) {
 	    $article = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `articles` WHERE `alias`=:alias LIMIT 0,1", array('alias'=>$alias)));
 	    if ($page != null && is_array($article)) {
@@ -45,6 +63,12 @@ class Articles extends Baseservice {
 	    return null;
 	}
 	
+	/**
+     * Gets only visible items by alias
+     * 
+     * @param   string  $id     The ID of the item to fetch
+     * @return  Array | null
+     */
 	public function getVisibleByAlias($alias) {
 	    $cur_time = time();
 	    $article = $this->db->fetchAssoc($this->db->safeQuery(

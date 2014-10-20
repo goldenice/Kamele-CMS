@@ -26,7 +26,7 @@ class Home extends Controller {
 				throw new Exception("Front page id setting not defined correctly");
 			}
 			else {
-				$this->page(array($fp_id));
+				$this->loader['\Modules\Main\Controllers\Page']->view(array($fp_id));
 			}
 		}
 		elseif ($fp_type == 'articles') {
@@ -38,12 +38,6 @@ class Home extends Controller {
 		
         $this->output['content'] = 'Test';
     }
-	
-	function page($arg = null) {
-		$page_id = $arg[0];
-		
-		// TODO: implement this method
-	}
 	
 	function articles($arg = null) {
 		// TODO: implement this method

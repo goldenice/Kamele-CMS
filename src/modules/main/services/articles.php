@@ -20,6 +20,8 @@ class Articles extends Baseservice {
     private $intro_length;
     
     public function __construct() {
+        parent::__construct();
+        
         $this->date_formatting = $this->loader['\Modules\Main\Models\Settings']->getKey('date_format');
     }
     

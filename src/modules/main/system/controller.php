@@ -16,6 +16,7 @@ class Controller extends Basecontroller {
     
     private $layout;
 	private $output;
+	private $prevent_render = false;
 	
 	function __construct() {
 		parent::__construct();
@@ -26,7 +27,9 @@ class Controller extends Basecontroller {
 	}
 	
     function __destruct() {
-        $this->layout->render($this->output);
+        if ($this->prevent_render == false) {
+            $this->layout->render($this->output);
+        }
     }
     
 }

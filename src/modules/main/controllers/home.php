@@ -27,6 +27,7 @@ class Home extends Controller {
 			}
 			else {
 				$this->loader['\Modules\Main\Controllers\Page']->view(array($fp_id));
+				$this->prevent_render = true;
 			}
 		}
 		elseif ($fp_type == 'articles') {

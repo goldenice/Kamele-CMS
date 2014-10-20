@@ -17,8 +17,10 @@ class Articles extends Controller {
         $articles = $this->loader['\Modules\Main\Services\Articles']->getLatest($page);
         
         $content = '';
-        foreach ($articles as $key=>$article) {
-            $content .= $this->layout->renderPart('modules/main/views/articles/list/item', $article);
+        if ($articles != null) {
+            foreach ($articles as $key=>$article) {
+                $content .= $this->layout->renderPart('modules/main/views/articles/list/item', $article);
+            }
         }
         
         $this->output['content'] = $content;

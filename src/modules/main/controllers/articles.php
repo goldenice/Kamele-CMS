@@ -23,8 +23,10 @@ class Articles extends Controller {
             }
         }
         
-        $this->output['content'] = $content;
         $this->output['title'] = 'Articles';
+        $this->output['content'] = $content;
+        
+        $this->render();
     }
     
 }

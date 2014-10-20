@@ -27,24 +27,22 @@ class Articles extends Baseservice {
     
     public function getLatest($page) {
         $itemsperpage = $this->loader['\Modules\Main\Models\Settings']->getKey('articles_per_page');
-        if ($itemsperpage === false)
-            $itemsperpage = $this->default_items_per_page;
-        
         $page--;
         
-        $articles = $this->loader['\Modules\Main\Models\Articles']->getVisibleList($page*$itemsperpage, (($page+1)*$itemsperpage)-1);
+        $articles = $this->loader['\Modules\Main\Models\Articles']->getVisibleList($page*$itemsperpage, $itemsperpage);
         foreach ($articles as $key=>$article) {
-            $this->normalize($article);
+            $this->normalize($articles[$key]);
         }
+        return $articles;
     }
     
     public function normalize(&$article) {
         $article['human_publish_from']  = date($this->date_formatting, $article['publish_from']);
-        $article['human_publish_to']    = date($this->date_formatting, $article['publish_']);
+        $article['human_publish_to']    = date($this->date_formatting, $article['publish_to']);
         $article['human_last_edit']     = date($this->date_formatting, $article['last_edit']);
         $article['human_added']         = date($this->date_formatting, $article['added']);
         $article['internat_publish_from']  = date($this->date_formatting_html, $article['publish_from']);
-        $article['internat_publish_to']    = date($this->date_formatting_html, $article['publish_']);
+        $article['internat_publish_to']    = date($this->date_formatting_html, $article['publish_to']);
         $article['internat_last_edit']     = date($this->date_formatting_html, $article['last_edit']);
         $article['internat_added']         = date($this->date_formatting_html, $article['added']);
     }

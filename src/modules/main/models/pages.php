@@ -21,7 +21,7 @@ class Pages extends Baseservice {
      * @return  Array | null
      */
 	public function getById($id) {
-	    $page = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `pages` WHERE `id`=:id LIMIT 0,1", array('id'=>$id)));
+	    $page = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `%spages` WHERE `id`=:id LIMIT 0,1", array('id'=>$id)));
 	    if ($page != null && is_array($page)) {
 	        return $page;
 	    }
@@ -35,7 +35,7 @@ class Pages extends Baseservice {
      * @return  Array | null
      */
 	public function getVisibleById($id) {
-	    $page = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `pages` WHERE `id`=:id AND `hidden`=0 LIMIT 0,1", array('id' => $id)));
+	    $page = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `%spages` WHERE `id`=:id AND `hidden`=0 LIMIT 0,1", array('id' => $id)));
         if ($page != null && is_array($page)) {
             return $page;
         }
@@ -49,7 +49,7 @@ class Pages extends Baseservice {
      * @return  Array | null
      */
 	public function getByAlias($alias) {
-	    $page = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `pages` WHERE `alias`=:alias LIMIT 0,1", array('alias'=>$alias)));
+	    $page = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `%spages` WHERE `alias`=:alias LIMIT 0,1", array('alias'=>$alias)));
 	    if ($page != null && is_array($page)) {
 	        return $page;
 	    }
@@ -63,7 +63,7 @@ class Pages extends Baseservice {
      * @return  Array | null
      */
 	public function getVisibleByAlias($alias) {
-	    $page = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `pages` WHERE `alias`=:alias AND `hidden`=0 LIMIT 0,1", array('alias' => $alias)));
+	    $page = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `%spages` WHERE `alias`=:alias AND `hidden`=0 LIMIT 0,1", array('alias' => $alias)));
 	    if ($page != null && is_array($page)) {
 	        return $page;
 	    }

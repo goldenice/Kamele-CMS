@@ -16,7 +16,7 @@ if (!defined('SYSTEM')) exit('No direct script access allowed');
 class Settings extends Basemodel {
     
     public function getKey($key) {
-        $result = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `settings` WHERE `key`=>:key LIMIT 0,1", array('key'=>$key)));
+        $result = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `%ssettings` WHERE `key`=:key LIMIT 0,1", array('key'=>$key)));
         if ($result === null) {
             return null;
         }
@@ -26,7 +26,7 @@ class Settings extends Basemodel {
     }
     
     public function updateKey($key, $value) {
-    	$result = $this->db->safeQuery("INSERT INTO `settings` (key, value) VALUES (:key, :value) ON DUPLICATE KEY UPDATE `value`=:value");
+    	$result = $this->db->safeQuery("INSERT INTO `%ssettings` (key, value) VALUES (:key, :value) ON DUPLICATE KEY UPDATE `value`=:value");
     	if ($result == false || $result == null) {
     		return false;
     	}

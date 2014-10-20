@@ -45,7 +45,7 @@ class Database extends Singleton {
      */
     public function __construct($host = DB_HOST, $user = DB_USER, $pass = DB_PASS, $name = DB_NAME, $type = DB_TYPE, $prefix = DB_PREFIX) {
         $this->dbtype = $type;
-        $this->handler = new MyPDO($this->dbtype.':dbname='.$name.';host='.$host, $user, $pass, $prefix);
+        $this->handler = new MyPDO($this->dbtype.':dbname='.$name.';host='.$host, $user, $pass, array(), $prefix);
         $this->handler->setAttribute(MyPDO::ATTR_ERRMODE, MyPDO::ERRMODE_SILENT);
         if ($this->handler == null or $this->handler == false) {
             return false;

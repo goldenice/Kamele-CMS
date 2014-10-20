@@ -14,9 +14,9 @@ if (!defined('SYSTEM')) exit('No direct script access allowed');
  */
 class Controller extends Basecontroller {
     
-    private $layout;
-	private $output;
-	private $prevent_render = false;
+    protected $layout;
+	protected $output;
+	protected $prevent_render = false;
 	
 	function __construct() {
 		parent::__construct();
@@ -26,10 +26,9 @@ class Controller extends Basecontroller {
 		$this->layout = new Layout($template_view);
 	}
 	
-    function __destruct() {
-        if ($this->prevent_render == false) {
-            $this->layout->render($this->output);
-        }
-    }
-    
+	protected function render() {
+	    if ($this->prevent_render == false) {
+	        $this->layout->render($this->output);
+	    }
+	}
 }

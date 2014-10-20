@@ -21,7 +21,7 @@ class Articles extends Baseservice {
      * @return  Array | null
      */
     public function getById($id) {
-	    $article = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `articles` WHERE `id`=:id LIMIT 0,1", array('id'=>$id)));
+	    $article = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `%sarticles` WHERE `id`=:id LIMIT 0,1", array('id'=>$id)));
 	    if ($article != null && is_array($article)) {
 	        return $article;
 	    }
@@ -37,7 +37,7 @@ class Articles extends Baseservice {
 	public function getVisibleById($id) {
 	    $cur_time = time();
 	    $article = $this->db->fetchAssoc($this->db->safeQuery(
-	        "SELECT * FROM `articles` WHERE `id`=:id AND `publish_from`<=:time AND `publish_to`>=:time AND `hidden`=0 LIMIT 0,1"
+	        "SELECT * FROM `%sarticles` WHERE `id`=:id AND `publish_from`<=:time AND `publish_to`>=:time AND `hidden`=0 LIMIT 0,1"
 	        ),
 	        array(
 	            'id'    => $id,
@@ -56,7 +56,7 @@ class Articles extends Baseservice {
      * @return  Array | null
      */
 	public function getByAlias($alias) {
-	    $article = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `articles` WHERE `alias`=:alias LIMIT 0,1", array('alias'=>$alias)));
+	    $article = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `%sarticles` WHERE `alias`=:alias LIMIT 0,1", array('alias'=>$alias)));
 	    if ($page != null && is_array($article)) {
 	        return $article;
 	    }
@@ -72,7 +72,7 @@ class Articles extends Baseservice {
 	public function getVisibleByAlias($alias) {
 	    $cur_time = time();
 	    $article = $this->db->fetchAssoc($this->db->safeQuery(
-	        "SELECT * FROM `articles` WHERE `alias`=:alias AND `publish_from`<=:time AND `publish_to`>=:time AND `hidden`=0 LIMIT 0,1"
+	        "SELECT * FROM `%sarticles` WHERE `alias`=:alias AND `publish_from`<=:time AND `publish_to`>=:time AND `hidden`=0 LIMIT 0,1"
 	        ), array(
 	            'alias' => $alias,
 	            'time'  => $cur_time
@@ -90,16 +90,18 @@ class Articles extends Baseservice {
 	 * @param   int     $number     The number of articles to show
 	 * @return  Array
 	 */
-	public function getVisibleList($start, $number) {
+	public function getVisibleList($start, $amount) {
+		$start = (int) $start;			// This is terrible SQL-escaping. But it works okay enough for now. PDO is a bitch.
+		$amount = (int) $amount;		// TODO: fix this terrible escaping.
 	    $cur_time = time();
 	    $articles = $this->db->toArray($this->db->safeQuery("   SELECT * 
-	                                                            FROM `articles` 
+	                                                            FROM `%sarticles` 
 	                                                            WHERE `publish_from`<=:time 
 	                                                                AND `publish_to`>=:time 
 	                                                                AND `hidden`=0 
 	                                                            ORDER BY `publish_from` DESC 
-	                                                            LIMIT :start,:num",
-	                                        array('time'=>$cur_time, 'start'=>$start, 'num'=>$number)));
+	                                                            LIMIT $start,$amount",
+	                                        array('time'=>$cur_time)));
 	    if ($articles != null && is_array($articles)) {
 	        return $articles;
 	    }

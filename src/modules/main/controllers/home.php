@@ -27,6 +27,7 @@ class Home extends Controller {
 			}
 			else {
 				$this->loader['\Modules\Main\Controllers\Page']->view(array($fp_id));
+				$this->layout = null;
 				$this->prevent_render = true;
 			}
 		}
@@ -39,6 +40,8 @@ class Home extends Controller {
 		}
 		
         $this->output['content'] = 'Test';
+        
+        $this->render();
     }
     
 }

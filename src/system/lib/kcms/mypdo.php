@@ -32,6 +32,7 @@ class MyPDO extends PDO {
 
     public function prepare($statement, $driver_options = array()) {
         $statement = $this->_tablePrefixSuffix($statement);
+        
         return parent::prepare($statement, $driver_options);
     }
 

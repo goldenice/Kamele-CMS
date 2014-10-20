@@ -31,7 +31,8 @@ class Home extends Controller {
 			}
 		}
 		elseif ($fp_type == 'articles') {
-			$this->articles();
+			$this->loader['\Modules\Main\Controllers\Articles']->latest();
+			$this->prevent_render = true;
 		}
 		else {
 			throw new Exception("Front page type setting not defined correctly");
@@ -39,8 +40,5 @@ class Home extends Controller {
 		
         $this->output['content'] = 'Test';
     }
-	
-	function articles($arg = null) {
-		// TODO: implement this method
-	}
+    
 }

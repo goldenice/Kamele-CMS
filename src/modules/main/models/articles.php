@@ -82,4 +82,27 @@ class Articles extends Baseservice {
 	    }
 	    return null;
 	}
+	
+	/**
+	 * Gets a number of visible articles
+	 * 
+	 * @param   int     $start      The number of items to start with
+	 * @param   int     $number     The number of articles to show
+	 * @return  Array
+	 */
+	public function getVisibleList($start, $number) {
+	    $cur_time = time();
+	    $articles = $this->db->toArray($this->db->safeQuery("   SELECT * 
+	                                                            FROM `articles` 
+	                                                            WHERE `publish_from`<=:time 
+	                                                                AND `publish_to`>=:time 
+	                                                                AND `hidden`=0 
+	                                                            ORDER BY `publish_from` DESC 
+	                                                            LIMIT :start,:num",
+	                                        array('time'=>$cur_time, 'start'=>$start, 'num'=>$number)));
+	    if ($articles != null && is_array($articles)) {
+	        return $articles;
+	    }
+	    return array();
+	}
 }

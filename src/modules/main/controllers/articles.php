@@ -29,4 +29,19 @@ class Articles extends Controller {
         $this->render();
     }
     
+    function view() {
+    	if (!is_numeric($arg[0]))
+            $page = $this->loader['\Modules\Main\Models\Articles']->getVisibleByAlias($arg[0]);
+        else
+            $page = $this->loader['\Modules\Main\Models\Articles']->getVisibleById($arg[0]);
+        
+        if ($page == null) {
+            // TODO: implement 404
+        }
+        else
+            $this->output['content'] = $this->layout->renderPart('modules/main/views/articles/single', $page);
+        
+        $this->render();
+    }
+    
 }

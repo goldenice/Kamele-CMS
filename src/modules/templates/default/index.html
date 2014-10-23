@@ -1,7 +1,21 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<meta charset="utf-8" />
+		<title>{title}</title>
+	
+		<link rel="stylesheet" href="{baseurl}modules/templates/default/css/main.css" />
+	</head>
+	
     <body>
-        <p>This is the default template.</p>
-        {content}
+        <div id="header">
+            <div class="center">
+                <h1>{setting:title}</h1>
+            </div>
+        </div>
+        
+        <div id="content" class="center">
+        	{content}
+        </div>
     </body>
 </html>

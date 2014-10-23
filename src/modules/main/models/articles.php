@@ -38,11 +38,11 @@ class Articles extends Baseservice {
 	    $cur_time = time();
 	    $article = $this->db->fetchAssoc($this->db->safeQuery(
 	        "SELECT * FROM `%sarticles` WHERE `id`=:id AND `publish_from`<=:time AND `publish_to`>=:time AND `hidden`=0 LIMIT 0,1"
-	        ),
+	        ,
 	        array(
 	            'id'    => $id,
 	            'time'  => $cur_time   
-	            ));
+	            )));
         if ($article != null && is_array($article)) {
             return $article;
         }
@@ -73,10 +73,10 @@ class Articles extends Baseservice {
 	    $cur_time = time();
 	    $article = $this->db->fetchAssoc($this->db->safeQuery(
 	        "SELECT * FROM `%sarticles` WHERE `alias`=:alias AND `publish_from`<=:time AND `publish_to`>=:time AND `hidden`=0 LIMIT 0,1"
-	        ), array(
+	        , array(
 	            'alias' => $alias,
-	            'time'  => $cur_time
-	            ));
+	            'time' => $cur_time
+	            )));
 	    if ($article != null && is_array($article)) {
 	        return $article;
 	    }

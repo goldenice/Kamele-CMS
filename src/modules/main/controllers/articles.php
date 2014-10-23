@@ -29,7 +29,7 @@ class Articles extends Controller {
         $this->render();
     }
     
-    function view() {
+    function view($arg = null) {
     	if (!is_numeric($arg[0]))
             $page = $this->loader['\Modules\Main\Models\Articles']->getVisibleByAlias($arg[0]);
         else

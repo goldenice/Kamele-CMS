@@ -1,0 +1,28 @@
+<script src="{baseurl}modules/libraries/tinymce/js/tinymce/tinymce.min.js"></script>
+<script src="{baseurl}modules/libraries/tinymce/js/tinymce/plugins/autolink/plugin.min.js"></script>
+<script src="{baseurl}modules/libraries/tinymce/js/tinymce/plugins/anchor/plugin.min.js"></script>
+<script src="{baseurl}modules/libraries/tinymce/js/tinymce/plugins/image/plugin.min.js"></script>
+<script src="{baseurl}modules/libraries/tinymce/js/tinymce/plugins/fullscreen/plugin.min.js"></script>
+<script src="{baseurl}modules/libraries/tinymce/js/tinymce/plugins/link/plugin.min.js"></script>
+<script src="{baseurl}modules/libraries/tinymce/js/tinymce/plugins/preview/plugin.min.js"></script>
+<script src="{baseurl}modules/libraries/tinymce/js/tinymce/plugins/table/plugin.min.js"></script>
+<script src="{baseurl}modules/libraries/tinymce/js/tinymce/plugins/wordcount/plugin.min.js"></script>
+<!-- <script src="{baseurl}modules/libraries/tinymce/js/tinymce/plugins//plugin.min.js"></script> -->
+<script>
+tinymce.init({
+    content_css: "{baseurl}modules/templates/default/css/main.css",
+    menubar: "edit insert view format table tools",
+    plugins: "autolink anchor image fullscreen link preview table wordcount",
+    menu: {
+        edit   : {title : 'Edit'  , items : 'undo redo | cut copy paste pastetext | selectall'},
+        insert : {title : 'Insert', items : 'link media | template hr'},
+        view   : {title : 'View'  , items : 'visualaid'},
+        format : {title : 'Format', items : 'bold italic underline strikethrough superscript subscript | formats | removeformat'},
+        table  : {title : 'Table' , items : 'inserttable tableprops deletetable | cell row column'},
+        tools  : {title : 'Tools' , items : 'spellchecker code'}
+    },
+    toolbar: "undo redo | formatselect styleselect | bold italic underline | alignleft aligncenter alignright alignjustify | link image | fullscreen",
+    auto_focus: "main_wysiwyg",
+    selector: ".wysiwyg"
+ });
+</script>

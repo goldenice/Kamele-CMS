@@ -1,6 +1,6 @@
 <?php
 namespace Modules\Main\Controllers;
-use \Modules\Main\System\Controller;
+use \Modules\Main\System\CmsController;
 use \System\Layout;
 use \Exception;
 
@@ -14,7 +14,7 @@ if (!defined('SYSTEM')) exit('No direct script access allowed');
  * @author		Rick Lubbers <me@ricklubbers.nl>
  * @since		0.1
  */
-class Home extends Controller {
+class Home extends CmsController {
 	
 	function index($arg = null) {
 		// Get whether the home page is a blog article overview or a static page

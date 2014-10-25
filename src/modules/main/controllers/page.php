@@ -1,12 +1,12 @@
 <?php
 namespace Modules\Main\Controllers;
-use \Modules\Main\System\Controller;
+use \Modules\Main\System\CmsController;
 use \System\Layout;
 use \Exception;
 
 if (!defined('SYSTEM')) exit('No direct script access allowed');
 
-class Page extends Controller {
+class Page extends CmsController {
     
     function view($arg = null) {
         if (!is_numeric($arg[0]))

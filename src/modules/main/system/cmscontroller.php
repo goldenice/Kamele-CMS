@@ -12,7 +12,7 @@ if (!defined('SYSTEM')) exit('No direct script access allowed');
  * @author		Rick Lubbers <me@ricklubbers.nl>
  * @since		0.1
  */
-class Controller extends Basecontroller {
+class CmsController extends Basecontroller {
     
     protected $layout;
 	protected $output;
@@ -24,6 +24,8 @@ class Controller extends Basecontroller {
 		$template = $this->loader['\Modules\Main\Services\Templating']->getTemplateDirectory();
 		$template_view = $template.'/index';
 		$this->layout = new Layout($template_view);
+		
+		$this->output['system:head'] = $this->layout->renderPart('modules/main/views/system/head', array());
 	}
 	
 	protected function render() {

@@ -45,6 +45,18 @@ class Articles extends CmsController {
     }
     
     function edit($arg = null) {
+    	$prepend = '';
+    	if ($_POST) {
+    		if ($_POST['id'] == 'NEW_ARTICLE')
+    			$ret = $this->loader['\Modules\Main\Models\Articles']->insert($_POST['title'], $_POST['body']);
+    		else
+    			$ret = $this->loader['\Modules\Main\Models\Articles']->updateById($_POST['id'], $_POST['title'], $_POST['body']);
+    		if ($ret != false)
+    			$prepend .= $this->layout->renderPart('modules/main/views/articles/messages/edit/success', array());
+    		else
+    			$prepend .= $this->layout->renderPart('modules/main/views/articles/messages/edit/fail', array());
+    	}
+    	
     	if (!is_numeric($arg[0])) {
     		$page = $this->loader['\Modules\Main\Models\Articles']->getVisibleByAlias($arg[0]);
     	}
@@ -53,10 +65,13 @@ class Articles extends CmsController {
     	}
     	
     	if ($page == null) {
-    		// TODO: create new page
+    		$page = array(
+    				'id'		=> 'NEW_ARTICLE',
+    				'title'		=> '',
+    				'body'		=> ''
+    			);
     	}
-    	else
-    		$this->output['content'] = $this->layout->renderPart('modules/main/views/articles/edit_single', array());
+    	$this->output['content'] = $this->layout->renderPart('modules/main/views/articles/edit_single', $page);
     		
     	$this->render();
     }

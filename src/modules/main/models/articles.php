@@ -24,7 +24,7 @@ class Articles extends Baseservice {
 	    $article = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `%sarticles` WHERE `id`=:id LIMIT 0,1", array('id'=>$id)));
 	    if ($article != null && is_array($article)) {
 	        return $article;
-	    }
+	    } 
 	    return null;
 	}
 	
@@ -72,7 +72,7 @@ class Articles extends Baseservice {
 	public function getVisibleByAlias($alias) {
 	    $cur_time = time();
 	    $article = $this->db->fetchAssoc($this->db->safeQuery(
-	        "SELECT * FROM `%sarticles` WHERE `alias`=:alias AND `publish_from`<=:time AND `publish_to`>=:time AND `hidden`=0 LIMIT 0,1"
+	        "SELECT * FROM `%sarticles` WHERE `alias`=:alias AND `publish_from`<=:time AND (`publish_to`>=:time OR `publish_to`=0) AND `hidden`=0 LIMIT 0,1"
 	        , array(
 	            'alias' => $alias,
 	            'time' => $cur_time
@@ -97,7 +97,7 @@ class Articles extends Baseservice {
 	    $articles = $this->db->toArray($this->db->safeQuery("   SELECT * 
 	                                                            FROM `%sarticles` 
 	                                                            WHERE `publish_from`<=:time 
-	                                                                AND `publish_to`>=:time 
+	                                                                AND (`publish_to`>=:time OR `publish_to`=0) 
 	                                                                AND `hidden`=0 
 	                                                            ORDER BY `publish_from` DESC 
 	                                                            LIMIT $start,$amount",
@@ -106,5 +106,31 @@ class Articles extends Baseservice {
 	        return $articles;
 	    }
 	    return array();
+	}
+	
+	/**
+	 * Update an article
+	 * 
+	 * @param   int     $id         The ID of the article to update
+	 * @parem   string  $title      New title of the article
+	 * @param   string  $body       The body HTML
+	 */
+	public function updateById($id, $title, $body) {
+	    $result = $this->db->safeQuery("UPDATE `articles` SET `title`=:title, `body`=:body, `last_edit`=:time WHERE `id`=:id",
+	        array('id'=>$id, 'title'=>$title, 'body'=>$body, 'time'=>time()));
+	    if ($result !== false and $result !== null) {
+	        return true;
+	    }
+	    return false;
+	}
+	
+	/**
+	 * Insert new article
+	 * 
+	 * @param   string  $title      The title of the article
+	 * @param   string  $body       Body HTML
+	 */
+	public function insert($title, $body) {
+	    $result = $this->db->safeQuery("INSERT INTO `articles` (title, body, publish_from, publish_to, hidden, last_edit, added) VALUES (:title, :body)");
 	}
 }

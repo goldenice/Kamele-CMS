@@ -131,6 +131,7 @@ class Articles extends Baseservice {
 	 * @param   string  $body       Body HTML
 	 */
 	public function insert($title, $body) {
-	    $result = $this->db->safeQuery("INSERT INTO `articles` (title, body, publish_from, publish_to, hidden, last_edit, added) VALUES (:title, :body)");
+	    // TODO: write this method
+	    //$result = $this->db->safeQuery("INSERT INTO `articles` (title, body, publish_from, publish_to, hidden, last_edit, added) VALUES (:title, :body)");
 	}
 }

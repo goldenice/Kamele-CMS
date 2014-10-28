@@ -70,4 +70,30 @@ class Pages extends Baseservice {
 	    return null;
 	}
 	
+	/**
+	 * Update an article
+	 * 
+	 * @param   int     $id         The ID of the article to update
+	 * @parem   string  $title      New title of the article
+	 * @param   string  $body       The body HTML
+	 */
+	public function updateById($id, $title, $body) {
+	    $result = $this->db->safeQuery("UPDATE `pages` SET `title`=:title, `body`=:body, `last_edit`=:time WHERE `id`=:id",
+	        array('id'=>$id, 'title'=>$title, 'body'=>$body, 'time'=>time()));
+	    if ($result !== false and $result !== null) {
+	        return true;
+	    }
+	    return false;
+	}
+	
+	/**
+	 * Insert new article
+	 * 
+	 * @param   string  $title      The title of the article
+	 * @param   string  $body       Body HTML
+	 */
+	public function insert($title, $body) {
+	    // TODO: write this method
+	    //$result = $this->db->safeQuery("INSERT INTO `pages` (title, body, publish_from, publish_to, hidden, last_edit, added) VALUES (:title, :body)");
+	}
 }

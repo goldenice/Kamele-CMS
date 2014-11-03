@@ -37,7 +37,7 @@ class Articles extends Baseservice {
 	public function getVisibleById($id) {
 	    $cur_time = time();
 	    $article = $this->db->fetchAssoc($this->db->safeQuery(
-	        "SELECT * FROM `%sarticles` WHERE `id`=:id AND `publish_from`<=:time AND `publish_to`>=:time AND `hidden`=0 LIMIT 0,1"
+	        "SELECT * FROM `%sarticles` WHERE `id`=:id AND `publish_from`<=:time AND (`publish_to`>=:time OR `publish_to`=0) AND `hidden`=0 LIMIT 0,1"
 	        ,
 	        array(
 	            'id'    => $id,
@@ -94,14 +94,15 @@ class Articles extends Baseservice {
 		$start = (int) $start;			// This is terrible SQL-escaping. But it works okay enough for now. PDO is a bitch.
 		$amount = (int) $amount;		// TODO: fix this terrible escaping.
 	    $cur_time = time();
-	    $articles = $this->db->toArray($this->db->safeQuery("   SELECT * 
+	    $articles = $this->db->safeQuery("   SELECT * 
 	                                                            FROM `%sarticles` 
 	                                                            WHERE `publish_from`<=:time 
 	                                                                AND (`publish_to`>=:time OR `publish_to`=0) 
 	                                                                AND `hidden`=0 
 	                                                            ORDER BY `publish_from` DESC 
 	                                                            LIMIT $start,$amount",
-	                                        array('time'=>$cur_time)));
+	                                        array('time'=>$cur_time));
+	    $articles = $this->db->toArray($articles);
 	    if ($articles != null && is_array($articles)) {
 	        return $articles;
 	    }

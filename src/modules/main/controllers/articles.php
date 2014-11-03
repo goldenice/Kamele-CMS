@@ -22,6 +22,7 @@ class Articles extends CmsController {
                 $content .= $this->layout->renderPart('modules/main/views/articles/list/item', $article);
             }
         }
+        $content = $this->layout->renderPart('modules/main/views/articles/list/wrapper', array('columns'=>$content));
         
         $this->output['title'] = 'Articles';
         $this->output['content'] = $content;

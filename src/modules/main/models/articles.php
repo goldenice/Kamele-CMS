@@ -1,6 +1,6 @@
 <?php
 namespace Modules\Main\Models;
-use	\System\Baseservice;
+use	\System\Basemodel;
 
 if (!defined('SYSTEM')) exit('No direct script access allowed');
 
@@ -12,7 +12,7 @@ if (!defined('SYSTEM')) exit('No direct script access allowed');
  * @author		Rick Lubbers <me@ricklubbers.nl>
  * @since		0.1
  */
-class Articles extends Baseservice {
+class Articles extends Basemodel {
     
     /**
      * Gets by ID

@@ -22,6 +22,12 @@ class User extends Cmscontroller {
 		
 		if ($_POST) {
 			$result = $this->loader['\Modules\Main\Services\Auth']->login($_POST['email'], $_POST['password']);
+			if ($result === true) {
+			    \System\Router::redirect('');
+			}
+			else {
+			    // TODO: implement error message
+			}
 		}
 		
 		$this->output['title'] = 'Login';

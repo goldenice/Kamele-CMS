@@ -33,6 +33,8 @@ class Auth extends Baseservice {
      * Loads authentication data from session
      */
     public function __construct() {
+    	parent::__construct();
+    	
         if (isset($_SESSION[DB_PREFIX.'login']) && $_SESSION[DB_PREFIX.'login'] == true) {
             $this->userdata = $_SESSION[DB_PREFIX.'user'];
             $this->login = true;
@@ -47,7 +49,7 @@ class Auth extends Baseservice {
      * @return  boolean
      */
     public function login($email, $password) {
-        $user = $this->loader['\Modules\Main\Models\Users']->getUserByEmail($email);
+        $user = $this->loader['\Modules\Main\Models\Users']->getByEmail($email);
         if ($this->hashPassword($password, $user['salt']) == $user['password']) {
             $this->login = true;
             $this->userdata = $user;
@@ -58,6 +60,15 @@ class Auth extends Baseservice {
             $this->userdata = null;
             return false;
         }
+    }
+    
+    /**
+     * Check if user is logged in
+     * 
+     * @return boolean
+     */
+    public function isLoggedIn() {
+    	return $this->login;
     }
     
     /**

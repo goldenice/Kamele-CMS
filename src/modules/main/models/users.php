@@ -35,7 +35,7 @@ class Users extends Basemodel {
      * @return  Array | null
      */
     public function getByEmail($email) {
-        $user = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `%susers` WHERE `id`=:id LIMIT 0,1", array('id'=>$id)));
+        $user = $this->db->fetchAssoc($this->db->safeQuery("SELECT * FROM `%susers` WHERE `email`=:email LIMIT 0,1", array('email'=>$email)));
         if ($user != false && $user != null) {
             return $user;
         }

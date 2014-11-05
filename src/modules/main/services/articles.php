@@ -1,6 +1,7 @@
 <?php
 namespace Modules\Main\Services;
 use \System\Baseservice;
+use \Exception;
 
 if (!defined('SYSTEM')) exit('No direct script access allowed');
 
@@ -23,10 +24,16 @@ class Articles extends Baseservice {
         parent::__construct();
         
         $this->date_formatting = $this->loader['\Modules\Main\Models\Settings']->getKey('date_format');
+    	if ($this->date_formatting == false || empty($this->date_formatting)) {
+    		throw new Exception('Could not retrieve date format from database');
+    	}
     }
     
     public function getLatest($page) {
         $itemsperpage = $this->loader['\Modules\Main\Models\Settings']->getKey('articles_per_page');
+        if ($itemsperpage == false || is_nan($itemsperpage) || $itemsperpage <= 0) {
+        	throw new Exception('Could not retrieve number of articles per page');
+        }
         $page--;
         
         $articles = $this->loader['\Modules\Main\Models\Articles']->getVisibleList($page*$itemsperpage, $itemsperpage);

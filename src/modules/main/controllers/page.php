@@ -24,6 +24,8 @@ class Page extends CmsController {
     }
     
     function edit($arg = null) {
+        $this->forceLogin();
+        
         $prepend = '';
     	if ($_POST) {
     		if ($_POST['id'] == 'NEW_PAGE')

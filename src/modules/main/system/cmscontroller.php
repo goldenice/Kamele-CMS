@@ -2,6 +2,7 @@
 namespace Modules\Main\System;
 use \System\Basecontroller;
 use \System\Layout;
+use \System\Router;
 if (!defined('SYSTEM')) exit('No direct script access allowed');
 
 /**
@@ -32,5 +33,13 @@ class CmsController extends Basecontroller {
 	    if ($this->prevent_render == false) {
 	        $this->layout->render($this->output);
 	    }
+	}
+	
+	protected function forceLogin() {
+	    if ($this->loader['\Modules\Main\Services\Auth']->isLoggedIn() != true) {
+	        Router::redirect('main/user/login');
+	        return false;
+	    }
+        return true;
 	}
 }

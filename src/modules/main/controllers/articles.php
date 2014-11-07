@@ -46,6 +46,8 @@ class Articles extends CmsController {
     }
     
     function edit($arg = null) {
+    	$this->forceLogin();
+    	
     	$prepend = '';
     	if ($_POST) {
     		if ($_POST['id'] == 'NEW_ARTICLE')

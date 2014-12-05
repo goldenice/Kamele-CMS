@@ -4,20 +4,38 @@
 		<meta charset="utf-8" />
 		<title>{title}</title>
 	
+		<link rel="stylesheet" href="{baseurl}modules/templates/default/foundation/css/normalize.css" />
+		<link rel="stylesheet" href="{baseurl}modules/templates/default/foundation/css/foundation.min.css" />
+	
 		<link rel="stylesheet" href="{baseurl}modules/templates/default/css/main.css" />
 		<link rel="stylesheet" href="{baseurl}modules/templates/default/css/article.css" />
+		
+		<script async src="{baseurl}modules/templates/default/js/foundation.min.js"></script>
+		
 		{system:head}
 	</head>
 	
     <body>
-        <div id="header">
-            <div class="center">
-                <h1>{setting:title}</h1>
-            </div>
+    	<nav class="top-bar" data-topbar role="navigation" data-options="is_hover: false">
+    		<ul class="title-area">
+    			<li class="name">
+    				<h1><a href="#">TIBOAP</a></h1>
+    			</li>
+    		</ul>
+    		
+    		<section class="top-bar-section">
+    			<ul class="right">
+    				{system:adminnav}
+    			</ul>
+    		</section>
+    	</nav>
+    
+    	<div class="row">
+        	<div class="small-12 columns">
+    	        <h1>{setting:title}</h1>
+    	    </div>
         </div>
         
-        <div id="content" class="center">
-        	{content}
-        </div>
+   		{content}
     </body>
 </html>
